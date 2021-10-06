@@ -2,15 +2,12 @@ package fa.edu.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +16,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fa.edu.model.Customer;
@@ -32,7 +28,6 @@ import fa.edu.repository.PlaceRepository;
 import fa.edu.service.InjectionScheduleService;
 import fa.edu.service.PhoneverificationService;
 import fa.edu.service.VaccineService;
-import fa.edu.service.VerificationResult;
 import fa.edu.service.implement.CustomerServiceImpl;
 import fa.edu.utils.ValidatePhoneNumber;
 
@@ -59,7 +54,7 @@ public class UserController {
 
 	@GetMapping("/")
 	public String viewUser() {
-		return "khaibao";
+		return "index";
 	}
 
 //	@PostMapping("/sendotp")
@@ -120,7 +115,7 @@ public class UserController {
 				return "redirect:/create";
 			} else {
 				model.addAttribute("error", "Định dạng number phone error");
-				return "khaibao";
+				return "index";
 			}
 		} else {
 			redirect.addFlashAttribute("message",
@@ -143,7 +138,7 @@ public class UserController {
 		return "update";
 	}
 
-	@GetMapping("/dangkitiem")
+	@GetMapping("/schedule")
 	public String viewSignInjection(Model model, Customer customer) {
 		model.addAttribute("schedule", new InjectionSchedule());
 		List<Vaccine> vaccines = vaccineService.findAll();
@@ -151,7 +146,7 @@ public class UserController {
 		model.addAttribute("places", places);
 		model.addAttribute("vaccines", vaccines);
 		model.addAttribute("customer", customer);
-		return "dangkitiem";
+		return "schedule";
 	}
 
 	@PostMapping("/save")
@@ -196,7 +191,7 @@ public class UserController {
 		redirect.addFlashAttribute("message", "Chúc mừng! Đăng kí thành công");
 		redirect.addFlashAttribute("customer", customer);
 		redirect.addFlashAttribute("cusId", customer.getCustomerId());
-		return "redirect:/dangkitiem";
+		return "redirect:/schedule";
 	}
 
 	@PostMapping("/saveUpdate")
@@ -221,7 +216,7 @@ public class UserController {
 		redirect.addFlashAttribute("message", "Chúc mừng! Cập nhật thông tin thành công");
 		redirect.addFlashAttribute("customer", customer);
 		redirect.addFlashAttribute("cusId", customer.getCustomerId());
-		return "redirect:/dangkitiem";
+		return "redirect:/schedule";
 	}
 
 	@PostMapping("/saveSchedule")
@@ -293,7 +288,7 @@ public class UserController {
 			System.out.println(objectError);
 		}
 		if (result.hasErrors()) {
-			return "dangkitiem";
+			return "schedule";
 		}
 
 		injectionSchedule.setStatus(1);
