@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Hệ thống thông tin quản lý Khai báo Y tế</title>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<meta name="description"
+	content="Hệ thống thông tin quản lý khai báo y tế">
+<meta name="keywords"
+	content="tờ khai y tế, khai báo y tế, health declaration, khai y tế">
+<meta name="Author" content="Hệ thống thông tin quản lý Khai báo Y tế">
+<meta name="copyright"
+	content="Hệ thống thông tin quản lý Khai báo Y tế">
+<link rel="image_src"
+	th:href="@{/image/qlnl_linewhite_18291_174666a3f1.png}">
+
+<link rel="image_src"
+	th:href="@{images/qlnl_linewhite_18291_174666a3f1.png}">
+<link rel="canonical" href="http://tokhaiyte.vn/">
+<link th:href="@{images/logoboyte_ad235.png}" rel="shortcut icon"
+	type="image/x-icon">
+<link type="text/css" rel="stylesheet" th:href="@{css/style.css}">
+<link type="text/css" rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="preload" as="script" th:href="@{/js/lib2-1.521.min.js}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/all.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/css/jquery.datetimepicker.min.css}">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/file.uploader/client/fileuploader.css?667">
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/select2-4.0.3/dist/css/select2.min.css?667">
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/jqueryui/themes/smoothness/jquery-ui.css?667">
+
+<style>
+em {
+	color: red;
+}
+</style>
+</head>
+
+<body
+	style="padding: 0px; margin: 0px; background-color: rgb(234, 234, 234);">
+	<div class="region-top">
+		<div id="module4" class="ModuleWrapper">
+			<div class="table-banner-home">
+				<div id="column1-4" class="column1 container ">
+					<div class="foverlay"></div>
+					<div class="columns-widget row">
+						<div class="col-md-12 col-xs-12 col-sm-12">
+							<div id="module5" class="ModuleWrapper">
+								<div id="module5" class="ModuleWrapper">
+									<div class="banner-home">
+										<div class="banner-top">
+											<div class="relative text-center text-uppercase">
+												<div class="col-left">
+													<a th:href="@{/}"> <img
+														th:src="@{/images/logoboyte.png}" width="80" alt="BoYte">
+													</a>
+
+													<div class="heading-title">
+														<div class="text-bold mb-5">Ban chỉ đạo quốc gia</div>
+														<div class="text-bold">Phòng chống dịch bệnh
+															Covid-19</div>
+														<div class="text-bold">Hệ thống quản lí đăng kí tiêm
+															vaccine</div>
+													</div>
+												</div>
+												<div class="col-right">
+													<img th:src="@{/images/logo-groups.png}" alt="Logo">
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="whole-page">
+		<div id="page-header"></div>
+		<div id="page-content">
+			<div id="module6" class="ModuleWrapper">
+				<div class="home-space">
+					<div id="column1-6" class="column1 container ">
+						<div class="foverlay"></div>
+						<div class="columns-widget row">
+							<div class="col-md-12 col-xs-12 col-sm-12">
+								<div id="module7" class="ModuleWrapper">
+									<div class="widget-space" style="height: 10px"></div>
+								</div>
+								<div id="module8" class="ModuleWrapper">
+									<div class="register-translation">
+										<div class="btn-login-logout text-right">
+											<!-- <a class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Đăng kí tiêm</span></a> &nbsp; <a
+												class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Tra Cứu kết quả</span></a> &nbsp; --> <a
+												class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Đăng nhập</span></a> &nbsp;
+										</div>
+									</div>
+								</div>
+								<div id="module9" class="ModuleWrapper">
+									<div id="wrapper9" class="passenger-wrapper">
+										<h1 class="text-center mtb-20">ĐĂNG KÍ TIÊM VACCINE</h1>
+										<div class="tab-content"
+											style="background: white; padding: 10px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+											<div id="tab-module-content-9"
+												class="tab-pane fade in active">
+												<div id="loadModuleContent9">
+													<div id="module1009" class="ModuleWrapper">
+														<div class="artile-edit-layout">
+															<form id="form1009" novalidate="novalidate" name="myForm"
+																th:action="@{/saveUpdate}" method="POST"
+																th:object="${customer}">
+																<input type="hidden" th:field="*{customerId}"
+																	name="customerId" class="form-control">
+																<div class="box box-edit-layout">
+																	<div class="box-body no-padding">
+																		<br>
+																		<div class="formWrapper formWrapper-desktop mt-20 ">
+																			<div class="form-resign2 form-resign2-desktop">
+																				<div class="">
+																					<div class="national-brand text-center mb-15">
+																						<div class="text-uppercase">
+																							<b>Tờ khai thông tin người đăng kí</b>
+																						</div>
+																					</div>
+																					<div class="text-center text-uppercase">
+																						<div class="">Đây là tài liệu quan trọng,
+																							thông tin của Anh/Chị sẽ giúp cơ quan y tế liên
+																							lạc khi cần thiết để đến điểm tập trung tiêm
+																							vacine</div>
+																						<div style="color: red; text-transform: none;">Khuyến
+																							cáo: Chúng tôi không chịu trách nhiệm cho trường
+																							hợp khai báo sai dẫn đến không được đăng kí tiêm
+																							vaccine</div>
+																						<div class="" style="color: green"
+																							th:if="${message != null}" th:text="${message}"></div>
+																					</div>
+																					<div class="row ">
+																						<div class="col-md-6 ">
+																							<div class="form-group  ">
+																								<label>Họ tên<em style="line-height: 1">(*)</em></label>
+																								<input th:field="*{fullName}" name="fullName"
+																									class="form-control" placeholder="Fullname"
+																									th:errorClass="is-invalid"
+																									style="text-transform: uppercase;">
+																								<div th:if="${#fields.hasErrors('fullName')}"
+																									th:errors="*{fullName}"
+																									class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																						<div class="col-md-6">
+																							<div class="form-group">
+																								<label>Email <em style="line-height: 1">(*)</em></label>
+																								<input th:field="*{email}" type="email"
+																									class="form-control " name="email" readonly
+																									placeholder="Email" th:errorClass="is-invalid">
+																								<div th:if="${#fields.hasErrors('email')}"
+																									th:errors="*{email}" class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="row info-type-box">
+																						<div class="col-md-4">
+																							<div class="form-group  ">
+																								<label>Ngày sinh<em
+																									style="line-height: 1">(*)</em></label> <input
+																									type="date" th:field="*{dateOfBirth}"
+																									th:errorClass="is-invalid" class="form-control"
+																									placeholder="Date Of Birth"
+																									style="text-transform: uppercase;">
+																								<div th:if="${#fields.hasErrors('dateOfBirth')}"
+																									th:errors="*{dateOfBirth}"
+																									class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																						<div class="col-md-4">
+
+																							<div class="form-group  ">
+																								<label>Giới tính <em
+																									style="line-height: 1">(*)</em></label> <select
+																									th:errorClass="is-invalid" th:field="*{gender}"
+																									id="selectGender"
+																									class="form-control custom-select">
+																									<option value="Male">Nam</option>
+																									<option value="Female">Nữ</option>
+																									<option value="Khac">Khác</option>
+																								</select>
+																								<div th:if="${#fields.hasErrors('gender')}"
+																									th:errors="*{gender}" class="invalid-feedback"></div>
+																							</div>
+
+																						</div>
+																						<div class="col-md-4">
+																							<div class="form-group  ">
+																								<label>Số Điện thoại <em
+																									style="line-height: 1">(*)</em></label> <input
+																									type="text" class="form-control " name="phone"
+																									th:field="*{phone}" placeholder="Phone"
+																									readonly th:errorClass="is-invalid">
+																								<div th:if="${#fields.hasErrors('phone')}"
+																									th:errors="*{phone}" class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																					</div>
+
+																					<div class="row ">
+																						<div class="col-md-12 ">
+																							<div class="form-group  ">
+																								<label>Số Căn Cước Công Dân <em
+																									style="line-height: 1">(*)</em></label> <input
+																									th:value="*{identityCard}" type="text"
+																									name="identityCard" class="form-control "
+																									readonly placeholder="Identity Card"
+																									th:errorClass="is-invalid">
+																								<div
+																									th:if="${#fields.hasErrors('identityCard')}"
+																									th:errors="*{identityCard}"
+																									class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="row ">
+																						<div class="col-xs-12 ">
+																							<div class="form-group">
+																								<label>Địa chỉ nơi ở <em
+																									style="line-height: 1">(*)</em></label> <input
+																									th:value="*{address}" type="text"
+																									name="address" class="form-control "
+																									placeholder="Address"
+																									th:errorClass="is-invalid">
+																								<div th:if="${#fields.hasErrors('address')}"
+																									th:errors="*{address}" class="invalid-feedback"></div>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="btn-submit-box text-center">
+																						<button type="submit" class="btn btn-success">Update</button>
+																					</div>
+																				</div>
+																			</div>
+																			<style>
+.register-phone ul {
+	display: inline-flex;
+}
+
+.register-phone ul li {
+	padding: 0 15px;
+}
+
+.register-phone ul li a {
+	color: #0b81f8;
+}
+
+.demo-cs-file-attack .ui-datepicker {
+	z-index: 999 !important;
+}
+
+.form-resign2 {
+	padding: 15px;
+	background: #fff;
+}
+
+.form-resign2 label {
+	font-weight: normal;
+}
+
+.form-resign2 .national-brand .text-uppercase {
+	font-size: 16px;
+}
+
+.form-resign2 .national-brand .text-2 {
+	display: inline-block;
+	border-bottom: 1px solid #333;
+	padding: 8px 0;
+	font-size: 13px;
+	margin-bottom: 8px;
+}
+
+.form-resign2 .text-center.text-uppercase {
+	font-weight: bold;
+	line-height: 35px;
+	padding-bottom: 15px;
+	font-size: 13px;
+}
+
+.request-form>.panel-body {
+	padding: 0;
+}
+
+.request-form>.panel-body>.modal-body {
+	padding: 0;
+}
+
+.request-form .form-inline.form-control {
+	border: none;
+	box-shadow: none;
+	outline: none;
+	border-bottom: 1px dotted #262626;
+	border-radius: 0;
+	vertical-align: middle;
+}
+
+.formWrapper .tableChoiceData {
+	display: flex;
+}
+
+.formWrapper .tableChoiceData>div {
+	flex: 1;
+}
+
+.form-group .dateInputText>div {
+	width: 96.5px !important;
+}
+/*@media (min-width: 768px){
+                                            .form-inline .form-control {
+                                            width: auto !important;
+                                            vertical-align: top;
+                                            }
+                                            }*/
+@media screen and (max-width: 767px) {
+	.formWrapper .tableChoiceData {
+		display: block;
+	}
+	.formWrapper .tableChoiceData .table {
+		margin-bottom: 0;
+	}
+	.formWrapper .tableChoiceData .cols-right {
+		margin-top: -1px;
+	}
+	.formWrapper .tableChoiceData .table>tbody>tr>td:nth-child(1) {
+		min-width: 140px;
+	}
+	.formWrapper .tableChoiceData .cols-right .table>thead {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.formWrapper .tableChoiceData .cols-right .table>tbody>tr>td:nth-child(2),
+		.formWrapper .tableChoiceData .table>tbody>tr>td:nth-child(2) {
+		min-width: 50px;
+	}
+	.formWrapper .tableChoiceData .cols-right .table>tbody>tr>td:nth-child(3),
+		.formWrapper .tableChoiceData .table>tbody>tr>td:nth-child(3) {
+		min-width: 60px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	a.captcha-refresh>img {
+		width: 70%;
+	}
+	a.captcha-refresh>i {
+		font-size: 15px;
+	}
+}
+</style>
+																		</div>
+																	</div>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="page-footer"></div>
+		</div>
+		<div class="region-bottom">
+			<div id="module1" class="ModuleWrapper">
+				<div class="table-bg-footer">
+					<div id="column1-1" class="column1 container ">
+						<div class="foverlay"></div>
+						<div class="columns-widget row">
+							<div class="col-md-12 col-xs-12 col-sm-12">
+								<div id="module2" class="ModuleWrapper"></div>
+								<div id="module3" class="ModuleWrapper">
+									<div class="footer">
+										<div class="row">
+											<div class="col-md-6 col-sm-6">
+												<p style="margin-top: 0;">
+													<a style="color: white;" rel="noopener noreferrer"
+														href="https://www.youtube.com/watch?v=uuBsNteM_60&amp;feature=youtu.be"
+														target="_blank">Video hướng dẫn Khai báo y tế nhập
+														cảnh</a>
+												</p>
+												<p style="margin-top: 10px;">
+													<a style="color: white;" rel="noopener noreferrer"
+														href="https://www.youtube.com/watch?v=uIK04d8hrHs&amp;feature=youtu.be"
+														target="_blank">Video hướng dẫn Khai báo y tế nội địa</a>
+												</p>
+												<p style="margin-top: 10px;">
+													<a style="color: white;" rel="noopener noreferrer"
+														href="https://www.youtube.com/watch?v=36pOpha1Dts&amp;feature=youtu.be"
+														target="_blank">Video hướng dẫn Khai báo y tế tại điểm
+														kiểm soát dịch</a>
+												</p>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="login-home-top">
+													<div>
+														<p>Phần dành cho cán bộ quản lý</p>
+														<ul class="login-home">
+															<li><a class="btn_signin" th:href="@{/login}"><i
+																	class="fa fa-sign-in" aria-hidden="true"></i> <span>Đăng
+																		nhập</span></a></li>
+														</ul>
+														<p style="margin-top: 10px;">
+															<a style="color: white;" th:href="@{/forgot_password}"
+																target="_blank">Quên Mật Khẩu</a>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<style>
+</style>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="ui-datepicker-div"
+			class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+
+		<script type="text/javascript">
+			function submitform() {
+				document.myform.submit();
+			}
+		</script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!--Start of Tawk.to Script-->
+		<script type="text/javascript">
+			var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+			(function() {
+				var s1 = document.createElement("script"), s0 = document
+						.getElementsByTagName("script")[0];
+				s1.async = true;
+				s1.src = 'https://embed.tawk.to/61562b7925797d7a8901ad82/1fgs9jku7';
+				s1.charset = 'UTF-8';
+				s1.setAttribute('crossorigin', '*');
+				s0.parentNode.insertBefore(s1, s0);
+			})();
+		</script>
+		<!--End of Tawk.to Script-->
+</body>
+
+</html>

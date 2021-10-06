@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{images/favicon.ico}">
+<link th:href="@{css/style.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{css/responsive.dataTables.min.css}">
+</head>
+
+<body class="skin-megna fixed-layout">
+	<div id="main-wrapper">
+		<header class="topbar" th:replace="fragments :: header"></header>
+		<aside class="left-sidebar" th:replace="fragments :: menu"></aside>
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="row page-titles">
+					<div class="col-md-5 align-self-center">
+						<h4 class="text-themecolor">UPDATE VACCINE</h4>
+					</div>
+					<div class="col-md-7 align-self-center text-right">
+						<div class="d-flex justify-content-end align-items-center">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+								<li class="breadcrumb-item active">Update Vaccine</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<form class="needs-validation" name="myForm"
+									th:action="@{/admin/vaccine/saveUpdate}" method="POST"
+									th:object="${vaccine}">
+									<input th:field="*{vaccineId}" type="hidden" readonly>
+									<div class="form-row">
+										<div class="col-md-8 mb-3">
+											<div class="card-title">
+												Vaccine Name <span class="text-danger">(*)</span>
+											</div>
+											<input type="text" th:value="*{vaccineName}"
+												name="vaccineName" readonly class="form-control"
+												placeholder="vaccineName" th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('vaccineName')}"
+												th:errors="*{vaccineName}" class="invalid-feedback"></div>
+										</div>
+
+										<div class="col-md-4 mb-3">
+											<div class="card-title">Number Of Injection <span class="text-danger">(*)</span></div>
+											<select class="form-control custom-select "
+												th:errorClass="is-invalid" th:field="*{numberOfInjection}"
+												id="selectPlace">
+												<option value="1">One Injection</option>
+												<option value="2">Two Injections</option>
+												<option value="3">Three Injections</option>
+											</select> <span th:if="${#fields.hasErrors('numberOfInjection')}"
+												th:errors="*{numberOfInjection}" class="invalid-feedback"></span>
+										</div>
+
+
+									</div>
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">Usage  <span class="text-danger">(*)</span></div>
+											<textarea rows="5" class="form-control " name="usage"
+												th:errorClass="is-invalid" placeholder="Ussage"
+												aria-invalid="false" th:field="*{usage}"></textarea>
+											<div th:if="${#fields.hasErrors('usage')}"
+												th:errors="*{usage}" class="invalid-feedback"></div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<div class="card-title">Indication  <span class="text-danger">(*)</span></div>
+											<textarea rows="5" class="form-control" name="indication"
+												th:errorClass="is-invalid" placeholder="Indication"
+												aria-invalid="false" th:field="*{indication}"></textarea>
+											<div th:if="${#fields.hasErrors('indication')}"
+												th:errors="*{indication}" class="invalid-feedback"></div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<div class="card-title">Contraindication  <span class="text-danger">(*)</span></div>
+											<textarea rows="5" class="form-control "
+												th:errorClass="is-invalid" name="contraindication"
+												placeholder="Contraindication" aria-invalid="false"
+												th:field="*{contraindication}"></textarea>
+											<div th:if="${#fields.hasErrors('contraindication')}"
+												th:errors="*{contraindication}" class="invalid-feedback"></div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-lg-4 col-md-3">
+											<div class="card-title">Time of begining  <span class="text-danger">(*)</span></div>
+											<input type="date" name="timeBegin"
+												th:errorClass="is-invalid" readonly class="form-control "
+												id="startDate" th:field="*{timeBegin}">
+											<div th:if="${#fields.hasErrors('timeBegin')}"
+												th:errors="*{timeBegin}" class="invalid-feedback"></div>
+
+										</div>
+										<div class="col-lg-4 col-md-3">
+											<div class="card-title">Time of ending  <span class="text-danger">(*)</span></div>
+											<input type="date" class="form-control " id="endDate"
+												th:errorClass="is-invalid" name="timeEnd"
+												th:field="*{timeEnd}"> <span
+												th:if="${#fields.hasErrors('timeEnd')}"
+												th:errors="*{timeEnd}" class="invalid-feedback"></span>
+										</div>
+										<div class="col-lg-4 col-md-3">
+											<div class="card-title">Origin  <span class="text-danger">(*)</span>sss</div>
+											<input type="text" class="form-control " placeholder="Origin"
+												name="origin" th:field="*{origin}"
+												th:errorClass="is-invalid"> <span
+												th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}"
+												class="invalid-feedback"></span>
+										</div>
+									</div>
+									<div class="bot p-t-20">
+										<button class="btn btn-success" type="submit">Save</button>
+										<button class="btn btn-info" type="reset">Reset</button>
+										<button class="btn btn-warning" type="button">
+											<a th:href="@{/admin/vaccine/list}" style="color: white">Cancel</a>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer" th:replace="fragments :: footer"></footer>
+	</div>
+	<script th:src="@{js/jquery-3.2.1.min.js} "></script>
+	<script th:src="@{js/popper.min.js} "></script>
+	<script th:src="@{js/bootstrap.min.js} "></script>
+	<script th:src="@{js/perfect-scrollbar.jquery.min.js} "></script>
+	<script th:src="@{js/waves.js }"></script>
+	<script th:src="@{js/sidebarmenu.js }"></script>
+	<script th:src="@{js/custom.min.js }"></script>
+	<script th:src="@{js/jquery.sparkline.min.js }"></script>
+	<script th:src="@{js/jquery.dataTables.min.js }"></script>
+	<script th:src="@{js/dataTables.responsive.min.js} "></script>
+	<script th:src="@{js/dataTables.buttons.min.js} "></script>
+	<script th:src="@{js/jquery.datetimepicker.full.js}"></script>
+
+
+	<script>
+		function validateNumber(e) {
+			const pattern = /^[0-9]$/;
+
+			return pattern.test(e.key)
+		}
+
+		$("#startDate").datetimepicker({
+			timepicker : false,
+			datepicker : true,
+			format : 'Y-m-d',
+			onShow : function(ct) {
+				this.setOptions({
+					maxDate : $('#endDate').val() ? $('#endDate').val() : false
+				})
+			}
+		})
+
+		$("#endDate").datetimepicker(
+				{
+					timepicker : false,
+					datepicker : true,
+					format : 'Y-m-d',
+					onShow : function(ct) {
+						this.setOptions({
+							minDate : $('#startDate').val() ? $('#startDate')
+									.val() : false
+						})
+					}
+				})
+	</script>
+</body>
+</html>

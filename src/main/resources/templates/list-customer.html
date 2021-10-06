@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="layout">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title> <
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{images/favicon.ico}">
+<link th:href="@{css/style.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{css/responsive.dataTables.min.css}">
+<link rel="stylesheet" th:href="@{css/jquery.datetimepicker.min.css}">
+</head>
+
+<body class="skin-megna fixed-layout">
+	<div id="main-wrapper">
+		<header class="topbar" th:replace="fragments :: header"></header>
+		<aside class="left-sidebar" th:replace="fragments :: menu"></aside>
+		<div class="page-wrapper ">
+			<div class="container-fluid">
+				<div class="row page-titles">
+					<div class="col-md-5 align-self-center">
+						<h4 class="text-themecolor">List Customer</h4>
+					</div>
+					<div class="col-md-7 align-self-center text-right">
+						<div class="d-flex justify-content-end align-items-center">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+								<li class="breadcrumb-item next">List customer</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="table-responsive m-t-40">
+									<div id="config-table_wrapper"
+										class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+										<div class="row">
+											<div class="col-sm-12 col-md-6"></div>
+											<div class="col-sm-12 col-md-6">
+												<div id="config-table_filter" class="dataTables_filter">
+													<form th:action="@{/admin/customer/page/1}">
+														<label>Search: <input type="text" name=keyword
+															class="form-control form-control-sm"
+															th:value="${keyword}" aria-controls="config-table">
+															&nbsp
+														</label>
+													</form>
+												</div>
+											</div>
+										</div>
+										<form th:action="@{/admin/customer/delete}" method="POST">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="alert alert-warning text-center"
+														th:if="${error}" th:text="${error}"></div>
+													<div class="alert alert-success text-center"
+														th:if="${message}" th:text="${message}"></div>
+													<div class="alert alert-success text-center"
+														th:if="${success}" th:text="${success}"></div>
+													<fieldset id="checkArray">
+														<table id="config-table"
+															class="table display table-bordered table-striped no-wrap dataTable no-footer dtr-inline"
+															role="grid" aria-describedby="config-table_info">
+															<thead>
+																<tr role="row">
+																	<th><input type="checkbox" class="checkboxDelete"
+																		onchange="checkAll(this)" name="chk[]" /></th>
+																	<th>Fullname</th>
+																	<th>Date Of Birth</th>
+																	<th>Gender</th>
+																	<th>Address</th>
+																	<th>IdentityCard</th>
+																	<th>Phone</th>
+																	<th>Action</th>
+
+																</tr>
+															</thead>
+															<tbody>
+
+																<tr th:each="cus :${listCus}">
+																	<td><input type="checkbox" th:name="idChecked"
+																		class="checkboxDelete" th:value="${cus.customerId}" /></td>
+																	<td>[[${cus.fullName}]]</td>
+																	<td>[[${cus.dateOfBirth}]]</td>
+																	<td>[[${cus.gender}]]</td>
+																	<td>[[${cus.address}]]</td>
+																	<td>[[${cus.identityCard}]]</td>
+																	<td>[[${cus.phone}]]</td>
+																	<td><a
+																		th:href="@{'/admin/customer/update/'+${cus.customerId}}">Update</a></td>
+																</tr>
+
+															</tbody>
+														</table>
+													</fieldset>
+												</div>
+											</div>
+											<div class="row p-t-20">
+												<div class="col-sm-12 col-md-5">
+													<div class="dataTables_info" id="config-table_info"
+														th:if="${totalItems > 0}" role="status" aria-live="polite">Showing
+														[[${startCount}]] to [[${endCount}]] of [[${totalItems}]]
+														entries</div>
+													<div class="dataTables_info" id="config-table_info"
+														th:unless="${totalItems > 0}" role="status"
+														aria-live="polite"></div>
+												</div>
+												<div class="col-sm-12 col-md-7">
+													<div class="dataTables_paginate paging_simple_numbers"
+														id="config-table_info">
+														<ul class="pagination">
+															<li
+																th:class="${currentPage > 1  ? 'paginate_button page-item next': 'paginate_button page-item disabled'}">
+																<a th:href="@{/admin/customer/page/1}"
+																aria-controls="config-table" data-dt-idx="0"
+																tabindex="0" class="page-link">First</a>
+															</li>
+															<li
+																th:class="${currentPage > 1 ? 'paginate_button page-item next' :  'paginate_button page-item disabled' }">
+																<a th:href="@{'/admin/customer/page/'+${currentPage-1}}"
+																aria-controls="config-table" data-dt-idx="0"
+																tabindex="0" class="page-link">Previous</a>
+															</li>
+															<th:block th:if="${totalPages==0}">
+																<li class="paginate_button page-item disabled"><a
+																	th:href="@{'/admin/customer/page/1'}"
+																	aria-controls="config-table" data-dt-idx="0"
+																	tabindex="0" class="page-link">0</a></li>
+															</th:block>
+															<th:block th:if="${totalPages<=10 && totalPages>0}">
+																<li th:each="i:${#numbers.sequence(1,totalPages)}"
+																	th:class=" ${i != currentPage ? 'paginate_button page-item next'  : 'paginate_button page-item active' }">
+																	<a th:href="@{'/admin/customer/page/'+${i}}"
+																	aria-controls="config-table" data-dt-idx="0"
+																	tabindex="0" class="page-link">[[${i}]]</a>
+																</li>
+															</th:block>
+															<th:block th:if="${totalPages>10}">
+																<th:block
+																	th:if="${currentPage <= 5 || currentPage > totalPages-4}">
+																	<li th:each="i:${#numbers.sequence(1,5)}"
+																		th:class=" ${i != currentPage ? 'paginate_button page-item next'  : 'paginate_button page-item active' }">
+																		<a th:href="@{'/admin/customer/page/'+${i}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">[[${i}]]</a>
+																	</li>
+
+																	<li th:each="i:${#numbers.sequence(6)}"
+																		th:class=" ${i != currentPage ? 'paginate_button page-item next'  : 'paginate_button page-item active' }">
+																		<a th:href="@{'/admin/customer/page/'+${i}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">...</a>
+																	</li>
+
+																	<li
+																		th:each="i:${#numbers.sequence(totalPages-4,totalPages)}"
+																		th:class=" ${i != currentPage ? 'paginate_button page-item next'  : 'paginate_button page-item active' }">
+																		<a th:href="@{'/admin/customer/page/'+${i}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">[[${i}]]</a>
+																	</li>
+
+
+																</th:block>
+																<th:block
+																	th:if="${currentPage>5 && currentPage < totalPages-4}">
+																	<a
+																		th:href="@{'/admin/customer/page/'+${currentPage-5}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">...</a>
+																	<li
+																		th:each="i:${#numbers.sequence(currentPage-4,currentPage+4)}"
+																		th:class=" ${i != currentPage ? 'paginate_button page-item next'  : 'paginate_button page-item active' }">
+																		<a th:href="@{'/admin/customer/page/'+${i}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">[[${i}]]</a>
+																	</li>
+																	<a
+																		th:href="@{'/admin/customer/page/'+${currentPage+5}}"
+																		aria-controls="config-table" data-dt-idx="0"
+																		tabindex="0" class="page-link">...</a>
+
+																</th:block>
+
+															</th:block>
+															<li
+																th:class="${currentPage < totalPages ? 'paginate_button page-item next' :'paginate_button page-item disabled' }">
+																<a th:href="@{'/admin/customer/page/'+${currentPage+1}}"
+																aria-controls="config-table" data-dt-idx="0"
+																tabindex="0" class="page-link">Next</a>
+															</li>
+															<li
+																th:class="${currentPage < totalPages ? 'paginate_button page-item next' :'paginate_button page-item disabled' }">
+																<a th:href="@{'/admin/customer/page/'+${totalPages}}"
+																aria-controls="config-table" data-dt-idx="0"
+																tabindex="0" class="page-link">Last</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<div class="button-cfg">
+												<button type="button" class="btn btn-success ">
+													<a th:href="@{/admin/customer/create}" style="color: white">Create
+														Customer</a>
+												</button>
+												<button type="button" class="btn btn-primary" id="myBtn">Delete</button>
+												<div class="modal fade" id="delete" tabindex="-1"
+													role="dialog" aria-labelledby="exampleModalLabel"
+													aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">Do you want to delete
+																Customer?</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary"
+																	data-dismiss="modal">Close</button>
+																<button type="submit" class="btn btn-primary">Delete</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer" th:replace="fragments :: footer"></footer>
+	</div>
+</body>
+
+<script th:src="@{js/jquery-3.2.1.min.js} "></script>
+<script th:src="@{js/popper.min.js} "></script>
+<script th:src="@{js/bootstrap.min.js} "></script>
+<script th:src="@{js/perfect-scrollbar.jquery.min.js} "></script>
+<script th:src="@{js/waves.js }"></script>
+<script th:src="@{js/sidebarmenu.js }"></script>
+<script th:src="@{js/custom.min.js }"></script>
+<script th:src="@{js/jquery.sparkline.min.js }"></script>
+<script th:src="@{js/jquery.dataTables.min.js }"></script>
+<script th:src="@{js/dataTables.responsive.min.js} "></script>
+<script th:src="@{js/dataTables.buttons.min.js} "></script>
+<script th:src="@{js/jquery.datetimepicker.full.js}"></script>
+<script>
+	$(document).ready(function() {
+		$("#myBtn").click(function() {
+			var checkedValue = $('.checkboxDelete:checked').length;
+			if (checkedValue != 0) {
+				$("#delete").modal();
+			} else {
+				this.form.submit();
+			}
+
+		});
+	});
+
+	function theFunction() {
+		$("#delete").modal();
+	}
+	function checkAll(ele) {
+		var checkboxes = document.getElementsByTagName('input');
+		if (ele.checked) {
+			for (var i = 0; i < checkboxes.length; i++) {
+				if (checkboxes[i].type == 'checkbox') {
+					checkboxes[i].checked = true;
+				}
+			}
+		} else {
+			for (var i = 0; i < checkboxes.length; i++) {
+				console.log(i)
+				if (checkboxes[i].type == 'checkbox') {
+					checkboxes[i].checked = false;
+				}
+			}
+		}
+	}
+</script>
+
+</html>

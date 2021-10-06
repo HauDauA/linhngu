@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Hệ thống thông tin quản lý Khai báo Y tế</title>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<meta name="description"
+	content="Hệ thống thông tin quản lý khai báo y tế">
+<meta name="keywords"
+	content="tờ khai y tế, khai báo y tế, health declaration, khai y tế">
+<meta name="Author" content="Hệ thống thông tin quản lý Khai báo Y tế">
+<meta name="copyright"
+	content="Hệ thống thông tin quản lý Khai báo Y tế">
+<link rel="image_src" href="/image/qlnl_linewhite_18291_174666a3f1.png">
+
+<meta property="og:url" content="http://tokhaiyte.vn">
+<link rel="image_src"
+	th:href="@{images/qlnl_linewhite_18291_174666a3f1.png}">
+<link rel="canonical" href="http://tokhaiyte.vn/">
+<link th:href="@{images/logoboyte_ad235.png}" rel="shortcut icon"
+	type="image/x-icon">
+<link type="text/css" rel="stylesheet" th:href="@{css/style.css}">
+<link type="text/css" rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="preload" as="script" th:href="@{/js/lib2-1.521.min.js}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/all.min.css}">
+
+<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/css/jquery.datetimepicker.min.css}">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/file.uploader/client/fileuploader.css?667">
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/select2-4.0.3/dist/css/select2.min.css?667">
+<link rel="stylesheet" type="text/css"
+	href="https://tokhaiyte.vn/3rdparty/jQuery/jqueryui/themes/smoothness/jquery-ui.css?667">
+
+<style>
+em {
+	color: red;
+}
+</style>
+</head>
+
+<body
+	style="padding: 0px; margin: 0px; background-color: rgb(234, 234, 234);">
+	<div class="region-top">
+		<div id="module4" class="ModuleWrapper">
+			<div class="table-banner-home">
+				<div id="column1-4" class="column1 container ">
+					<div class="foverlay"></div>
+					<div class="columns-widget row">
+						<div class="col-md-12 col-xs-12 col-sm-12">
+							<div id="module5" class="ModuleWrapper">
+								<div id="module5" class="ModuleWrapper">
+									<div class="banner-home">
+										<div class="banner-top">
+											<div class="relative text-center text-uppercase">
+												<div class="col-left">
+													<a th:href="@{/}"> <img
+														th:src="@{/images/logoboyte.png}" width="80" alt="BoYte">
+													</a>
+
+													<div class="heading-title">
+														<div class="text-bold mb-5">Ban chỉ đạo quốc gia</div>
+														<div class="text-bold">Phòng chống dịch bệnh
+															Covid-19</div>
+														<div class="text-bold">Hệ thống quản lí đăng kí tiêm
+															vaccine</div>
+													</div>
+												</div>
+												<div class="col-right">
+													<img th:src="@{/images/logo-groups.png}" alt="Logo">
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="whole-page">
+		<div id="page-header"></div>
+		<div id="page-content">
+			<div id="module6" class="ModuleWrapper">
+				<div class="home-space">
+					<div id="column1-6" class="column1 container ">
+						<div class="foverlay"></div>
+						<div class="columns-widget row">
+							<div class="col-md-12 col-xs-12 col-sm-12">
+								<div id="module7" class="ModuleWrapper">
+									<div class="widget-space" style="height: 10px"></div>
+								</div>
+								<div id="module8" class="ModuleWrapper">
+									<div class="register-translation">
+										<div class="btn-login-logout text-right">
+											<a class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Đăng kí tiêm</span></a> &nbsp; <a
+												class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Tra Cứu kết quả</span></a> &nbsp; <a
+												class="btn btn-signin" th:href="@{/login}"> <i
+												class="fa fa-sign-in" aria-hidden="true"></i> <span
+												class="ml-5">Đăng nhập</span></a> &nbsp;
+										</div>
+									</div>
+								</div>
+								<div id="module9" class="ModuleWrapper">
+									<div id="wrapper9" class="passenger-wrapper">
+										<h1 class="text-center mtb-20">ĐĂNG KÍ TIÊM VACCINE</h1>
+										<div class="tab-content"
+											style="background: white; padding: 10px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+											<div id="tab-module-content-9"
+												class="tab-pane fade in active">
+												<div id="loadModuleContent9">
+													<div id="module11" class="ModuleWrapper">
+														<div id="module12" class="ModuleWrapper">
+															<div class="wrapper-login">
+																<div class="registerFormType1" style="">
+																	<form method="POST" class="signin-form" id="form12"
+																		th:action="@{/}">
+																		<div class="alert alert-warning text-center"
+																			th:if="${error}" th:text="${error}"></div>
+																		<div class="alert alert-success text-center"
+																			th:if="${message}" th:text="${message}"></div>
+																		<div class="alert alert-success text-center"
+																			th:if="${success}" th:text="${success}"></div>
+																		<div class="form-signin p-15 1">
+																			<div class="formContent">
+																				<div class="field-container mb-20">
+																					<div class="si-container-title tk-intro">Nhập
+																						số điện thoại để xác thực</div>
+																					<div class="form-table">
+																						<input id="phone" tabindex="1" type="tel"
+																							name="phone" class="input-text form-textbox"
+																							required
+																							style="font-size: 20px; text-align: center; letter-spacing: 2px;"
+																							value="" placeholder="Nhập số điện thoại">
+																					</div>
+																				</div>
+																				<div class="text-center">
+																					<div class="btn-row">
+																						<button type="submit" class="btn btn-submit-form">Tiếp
+																							tục</button>
+																					</div>
+																				</div>
+
+																			</div>
+																		</div>
+																	</form>
+																</div>
+																<div class="text-notice">
+																	<div>
+																		Từ ngày <b style="color: red">13/8/2021</b>, hệ thống
+																		Tờ khai y tế nâng cấp các chức năng sau:
+																	</div>
+																	<div>1. Danh sách trường hợp cách ly bổ sung xem
+																		log lịch sử khai báo</div>
+																	<div>2. Danh sách các trường hợp cách ly và dấu
+																		hiệu bất thường bổ sung tìm kiếm theo địa bàn và xuất
+																		dữ liệu</div>
+																	<div>3. Bổ sung báo cáo số liệu người cách ly tại
+																		địa bàn</div>
+																	<div>4. Bổ sung danh sách đăng ký cách ly và chức
+																		năng duyệt đăng ký</div>
+																	<div>5. Bổ sung chức năng đăng ký cách ly trên
+																		ứng dụng người dân.</div>
+																	<div>6. Bổ sung ứng dụng cho cán bộ y tế xã
+																		phường</div>
+																	<div>7. Bổ sung chức năng log định vị</div>
+																</div>
+															</div>
+															<style>
+#module12.fixfixed {
+	padding-bottom: 40vh;
+	transition: padding-bottom 0.3s;
+}
+
+#module12 label.error {
+	font-weight: normal;
+	font-size: 13px;
+	color: red;
+	text-align: center;
+	margin-top: 5px;
+	display: block;
+}
+
+#module12 {
+	transition: padding-bottom 0.3s;
+	display: flex;
+	display: -webkit-flex;
+	width: 100%;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	height: 80vh;
+	min-height: 300px;
+}
+
+#module12 .signin-form {
+	width: 300px;
+	margin: auto;
+}
+
+.relative {
+	position: relative;
+}
+
+#module12 .banner-top {
+	position: relative;
+	color: #fff;
+	padding: 15px;
+	margin-bottom: 15px;
+	width: 300px;
+	margin: auto;
+	-webkit-border-radius: 30px 30px 0 0;
+	-moz-border-radius: 30px 30px 0 0;
+	border-radius: 30px 30px 0 0;
+	overflow: hidden;
+}
+
+#module12 .banner-top a {
+	color: #fff;
+}
+
+#module12 .fa-1_5x {
+	font-size: 150%;
+}
+
+.registerFormType1 .form-signin {
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	align-items: center;
+	-webkit-flex-direction: vertical;
+	-moz-flex-direction: vertical;
+	-ms-flex-direction: column;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+}
+
+.text-italic {
+	font-style: italic;
+}
+
+.registerFormType1 .logo {
+	margin-bottom: 20px;
+}
+
+.registerFormType1 .logo .logo-img {
+	max-height: 100px;
+}
+
+.registerFormType1 .formContent {
+	width: 100%;
+	max-width: 380px;
+	margin: 5px auto 13px;
+	word-break: break-word;
+}
+
+.registerFormType1 .tk-intro {
+	font-size: 17px;
+	line-height: 1.38105;
+	font-weight: 400;
+	letter-spacing: .011em;
+}
+
+.registerFormType1 .si-container-title {
+	max-width: 380px;
+	margin: 5px auto 10px;
+	word-break: break-word;
+	text-align: center;
+	color: #777;
+}
+
+.registerFormType1 .form-table {
+	border-radius: 7px;
+	position: relative;
+	display: table;
+	width: 100%;
+	text-align: left;
+}
+
+.signin-form .field-container {
+	position: relative;
+}
+
+.signin-form .input-text {
+	font-size: 18px;
+	line-height: 1.29412;
+	font-weight: 400;
+	letter-spacing: -.021em;
+	display: inline-block;
+	box-sizing: border-box;
+	vertical-align: top;
+	width: 100%;
+	height: 34px;
+	margin-bottom: 14px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #333;
+	text-align: left;
+}
+
+.signin-form .form-textbox {
+	margin: 0;
+	box-shadow: none;
+	height: 42px;
+	border-radius: 6px;
+	padding-right: 28px;
+}
+
+.signin-form .lock-icon {
+	display: none;
+	position: absolute;
+	background: transparent;
+	outline: none;
+	cursor: pointer;
+	top: 4px;
+	margin: 0;
+	right: 10px;
+	padding: 0 1px 0 2px;
+	font-size: 24px;
+}
+
+.signin-form .btn-submit-otp, .signin-form .btn-submit-form {
+	display: inline-block;
+	background-color: #0190f3;
+	min-width: 210px;
+	vertical-align: middle;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #fff;
+	font-weight: 500;
+	border: 0 none;
+	-webkit-border-radius: 999px !important;
+	-moz-border-radius: 999px !important;
+	border-radius: 999px !important;
+	padding: 10px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	font-size: 18px;
+}
+
+#otp12::-webkit-outer-spin-button, #otp12::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+#otp12 {
+	-moz-appearance: textfield;
+}
+
+.login-form-social {
+	line-height: 30px;
+}
+
+.login-form-social>a {
+	margin: 5px;
+	border-radius: 50%;
+	color: #fff;
+}
+
+.login-form-social>a i {
+	border-radius: 50%;
+	color: #fff;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	background: #0190f3;
+}
+
+.login-form-social>a.login-facebook i {
+	background: #4867aa;
+}
+
+.login-form-social>a.login-google i {
+	background: #e94235;
+}
+
+.login-form-social>a:hover>i {
+	background: red;
+}
+</style>
+														</div>
+														<style>
+.form-resign2 .tableChoiceData table tbody {
+	white-space: normal;
+}
+
+@media ( max-width : 425px) {
+	.insurance-box input {
+		margin-bottom: 5px;
+	}
+}
+
+@media ( min-width : 769px) {
+	.label-width.form-inline .form-control {
+		max-width: 299px !important;
+		width: 299px !important;
+	}
+}
+
+@media ( max-width : 768px) {
+	.label-width.form-inline .form-control {
+		width: 100% !important;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.artile-edit-layout .form-resign2 .label-width.form-inline .form-control.form-inline:not(.full-width)
+		{
+		max-width: 299px !important;
+		width: 299px !important;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.artile-edit-layout .form-resign2 .label-width.form-inline .form-control.form-inline:not(.full-width)
+		{
+		max-width: 299px !important;
+		width: 299px !important;
+	}
+}
+
+@media ( max-width : 425px) {
+	.info-namPas-box label {
+		width: auto !important;
+		white-space: nowrap;
+	}
+}
+
+.form-resign2 span.text-required {
+	color: red;
+	font-style: italic;
+}
+
+.insurance-box label {
+	display: inline-block;
+	width: 240px !important;
+}
+
+.label-width label {
+	display: inline-block;
+	width: 220px;
+}
+
+.gender-box label {
+	width: 220px;
+	display: inline-block;
+}
+
+.form-resign2 .form-group.box-gaden>label {
+	display: unset;
+}
+
+@media ( min-width : 1024px) {
+	.passenger-wrapper .box-edit-layout .form-group.box-gaden:not(.group-input-inline) .select2-container.select2-container--default
+		{
+		width: auto !important;
+	}
+}
+
+@media ( min-width : 768px) {
+	input.form-control.inline-block.form-inline {
+		min-width: 250px;
+	}
+}
+
+.box-edit-layout .insurance-box {
+	margin-bottom: 15px;
+}
+
+.box-edit-layout .insurance-box .form-group {
+	margin-bottom: 0;
+}
+
+.box-edit-layout .insurance-box-inside {
+	margin-top: 15px;
+}
+
+@media screen and (min-width: 1024px) {
+	#module7 .artile-edit-layout .form-resign2 .select2-container.select2-container--default
+		{
+		width: auto !important;
+		min-width: 240px;
+	}
+}
+
+.mt-30 {
+	margin-top: 30px;
+}
+
+#module11 .sendType-option input {
+	display: none !important;
+}
+
+#module11 .sendType-option label {
+	cursor: pointer;
+}
+
+#module11 .sendType-option input+img {
+	padding: 2px;
+	border: 1px solid #eaeaea;
+}
+
+#module11 .sendType-option input:checked+img {
+	border-color: #0a6dd4;
+}
+
+#module11 .list-select li {
+	margin-bottom: 15px;
+	display: -webkit-flex;
+	display: flex;
+	display: flex;
+}
+
+#module11 .list-select span {
+	width: calc(100% - 105px);
+	display: inline-block;
+	padding-right: 10px;
+	margin-top: -5px;
+}
+
+.formWrapper .btn-larger {
+	font-size: 21px;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-radius: 25px;
+}
+
+@media ( max-width : 425px) {
+	.form-control.capcha-text {
+		min-width: 150px;
+	}
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+.row-eq-height {
+	display: flex;
+	flex-wrap: wrap;
+}
+</style>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="page-footer"></div>
+			</div>
+			<div class="region-bottom">
+				<div id="module1" class="ModuleWrapper">
+					<div class="table-bg-footer">
+						<div id="column1-1" class="column1 container ">
+							<div class="foverlay"></div>
+							<div class="columns-widget row">
+								<div class="col-md-12 col-xs-12 col-sm-12">
+									<div id="module2" class="ModuleWrapper"></div>
+									<div id="module3" class="ModuleWrapper">
+										<div class="footer">
+											<div class="row">
+												<div class="col-md-6 col-sm-6">
+													<p style="margin-top: 0;">
+														<a style="color: white;" rel="noopener noreferrer"
+															href="https://www.youtube.com/watch?v=uuBsNteM_60&amp;feature=youtu.be"
+															target="_blank">Video hướng dẫn Khai báo y tế nhập
+															cảnh</a>
+													</p>
+													<p style="margin-top: 10px;">
+														<a style="color: white;" rel="noopener noreferrer"
+															href="https://www.youtube.com/watch?v=uIK04d8hrHs&amp;feature=youtu.be"
+															target="_blank">Video hướng dẫn Khai báo y tế nội địa</a>
+													</p>
+													<p style="margin-top: 10px;">
+														<a style="color: white;" rel="noopener noreferrer"
+															href="https://www.youtube.com/watch?v=36pOpha1Dts&amp;feature=youtu.be"
+															target="_blank">Video hướng dẫn Khai báo y tế tại
+															điểm kiểm soát dịch</a>
+													</p>
+												</div>
+												<div class="col-md-6 col-sm-6">
+													<div class="login-home-top">
+														<div>
+
+															<p>Phần dành cho cán bộ quản lý</p>
+															<ul class="login-home">
+																<li><a class="btn_signin" th:href="@{/login}"><i
+																		class="fa fa-sign-in" aria-hidden="true"></i> <span>Đăng
+																			nhập</span></a></li>
+															</ul>
+															<p style="margin-top: 10px;">
+																<a style="color: white;" th:href="@{/forgot_password}"
+																	target="_blank">Quên Mật Khẩu</a>
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+		(function() {
+			var s1 = document.createElement("script"), s0 = document
+					.getElementsByTagName("script")[0];
+			s1.async = true;
+			s1.src = 'https://embed.tawk.to/61562b7925797d7a8901ad82/1fgs9jku7';
+			s1.charset = 'UTF-8';
+			s1.setAttribute('crossorigin', '*');
+			s0.parentNode.insertBefore(s1, s0);
+		})();
+	</script>
+</body>
+
+</html>

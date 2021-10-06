@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{images/favicon.ico}">
+<link th:href="@{css/style.min.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{css/responsive.dataTables.min.css}">
+
+</head>
+
+<body class="skin-megna fixed-layout">
+	<div id="main-wrapper">
+		<header class="topbar" th:replace="fragments :: header"></header>
+		<aside class="left-sidebar" th:replace="fragments :: menu"></aside>
+		<div class="page-wrapper">
+			<!-- ============================================================== -->
+			<!-- Container fluid  -->
+			<!-- ============================================================== -->
+			<div class="container-fluid">
+				<div class="row page-titles">
+					<div class="col-md-5 align-self-center">
+						<h4 class="text-themecolor">UPDATE EMPLOYEE</h4>
+					</div>
+					<div class="col-md-7 align-self-center text-right">
+						<div class="d-flex justify-content-end align-items-center">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+								<li class="breadcrumb-item active">Update Employee</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<form class="needs-validation" name="myForm"
+					th:action="@{/admin/employee/saveUpdate}" method="POST"
+					th:object="${employee}">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Personal Information</h4>
+									<hr>
+									<input type="hidden" th:field="*{employeeId}" name="employeeId"
+										class="form-control">
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Fullname <span class="text-danger">(*)</span>
+											</div>
+											<input type="text" th:value="*{fullName}" name="fullName"
+												class="form-control" placeholder="Fullname"
+												th:errorClass="is-invalid">
+
+											<div th:if="${#fields.hasErrors('fullName')}"
+												th:errors="*{fullName}" class="invalid-feedback"></div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Date of birth<span class="text-danger">(*)</span>
+											</div>
+											<input type="date" th:field="*{birthDate}"
+												th:errorClass="is-invalid" class="form-control"
+												placeholder="Date Of Birth">
+											<div th:if="${#fields.hasErrors('birthDate')}"
+												th:errors="*{birthDate}" class="invalid-feedback"></div>
+
+										</div>
+
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Gender <span span class="text-danger">(*)</span>
+											</div>
+											<div class="form-check" style="display: flex;">
+												<div class="custom-control custom-radio">
+													<input value="Male" th:field="*{gender}" type="radio"
+														id="customRadio1" name="gender"
+														class="custom-control-input"> <label
+														class="custom-control-label" for="customRadio1">Male</label>
+												</div>
+												<div class="custom-control custom-radio ml-5">
+													<input value="FeMale" th:field="*{gender}" type="radio"
+														id="customRadio2" name="gender"
+														class="custom-control-input"> <label
+														class="custom-control-label" for="customRadio2">Female</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Address <span class="text-danger">(*)</span>
+											</div>
+											<input th:value="*{address}" type="text" name="address"
+												class="form-control " placeholder="Address"
+												th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('address')}"
+												th:errors="*{address}" class="invalid-feedback"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Account Information</h4>
+									<hr>
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												UserName <span class="text-danger">(*)</span>
+											</div>
+											<input type="text" th:value="*{username}" name="username"
+												readonly="readonly" placeholder="Username"
+												class="form-control" th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('username')}"
+												th:errors="*{username}" class="invalid-feedback"></div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Password <span class="text-danger">(*)</span>
+											</div>
+											<input type="password" name="password" class="form-control"
+												placeholder="Password" th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('password')}"
+												th:errors="*{password}" class="invalid-feedback"></div>
+
+										</div>
+
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Password Confirm<span class="text-danger">(*)</span>
+											</div>
+											<input type="password" class="form-control"
+												th:value="*{confirmPassword}" name="confirmPassword"
+												placeholder="Password Confirm" th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('confirmPassword')}"
+												th:errors="*{confirmPassword}" class="invalid-feedback"></div>
+
+
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Email <span class="text-danger">(*)</span>
+											</div>
+											<input th:value="*{email}" type="email" class="form-control "
+												readonly="readonly" name="email" placeholder="Email"
+												th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('email')}"
+												th:errors="*{email}" class="invalid-feedback"></div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												Phone <span class="text-danger">(*)</span>
+											</div>
+											<input type="text" class="form-control " name="phone"
+												readonly="readonly" th:value="*{phone}" placeholder="Phone"
+												th:errorClass="is-invalid">
+											<div th:if="${#fields.hasErrors('phone')}"
+												th:errors="*{phone}" class="invalid-feedback"></div>
+										</div>
+
+									</div>
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<div class="card-title">
+												WorkPlace <span class="text-danger">(*)</span>
+											</div>
+											<select class="form-control custom-select "
+												th:errorClass="is-invalid" th:field="*{place}"
+												id="selectPlace">
+												<th:block th:each="place : ${listPlaces}">
+													<option th:text="${place.placeName}" th:value=${place.id}></option>
+												</th:block>
+											</select>
+											<div th:if="${#fields.hasErrors('place')}"
+												th:errors="*{place}" class="invalid-feedback"></div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-4 mb-3 p-t-20">
+											<button class="btn btn-success" type="submit">Save</button>
+											<button class="btn btn-info" type="reset">Reset</button>
+											<button class="btn btn-warning" type="button">
+												<a th:href="@{/admin/employee/list}" style="color: white">Cancel</a>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer" th:replace="fragments :: footer"></div>
+
+</body>
+
+<script th:src="@{js/jquery-3.2.1.min.js} "></script>
+<script th:src="@{js/popper.min.js} "></script>
+<script th:src="@{js/bootstrap.min.js} "></script>
+<script th:src="@{js/perfect-scrollbar.jquery.min.js} "></script>
+<script th:src="@{js/waves.js }"></script>
+<script th:src="@{js/sidebarmenu.js }"></script>
+<script th:src="@{js/custom.min.js }"></script>
+<script th:src="@{js/jquery.sparkline.min.js }"></script>
+<script th:src="@{js/jquery.dataTables.min.js }"></script>
+<script th:src="@{js/dataTables.responsive.min.js} "></script>
+<script th:src="@{js/dataTables.buttons.min.js} "></script>
+<script th:src="@{js/jquery.datetimepicker.full.js}"></script>
+
+</body>
+
+</html>
