@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h2>List User</h2>
+			<table class="table table-hover">
+				<form th:action="@{/list}" method="POST" th:object="${employee}">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Name</th>
+							<th>Address</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user :${users}">
+							<td th:text="${user.username}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.address}"></td>
+							<td th:text="${user.phone}"></td>
+							<td th:text="${user.email}"></td>
+							<td><a th:href="@{'/update/'+${user.id}}">Edit</a>&nbsp;&nbsp;
+								<a th:href="@{'/delete/'+${user.id}}"
+								onclick="return confirm('Are you sure?')">Delete</a></td>
+							</td>
+						</tr>
+					</tbody>
+				</form>
+			</table>
+		</div>
+		<button class="btn btn-success">
+			<a th:href="@{/create}" style="color: white">New User</a>
+		</button>
+	</div>
+
+</body>
+</html>
